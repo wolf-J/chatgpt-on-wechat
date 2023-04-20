@@ -268,7 +268,7 @@ class ChatChannel(Channel):
                         )
                     reply.content = reply_text
                 elif reply.type == ReplyType.ERROR or reply.type == ReplyType.INFO:
-                    reply.content = "[" + str(reply.type) + "]\n" + reply.content
+                    reply.content = "[" + str(reply.type) + "] " + reply.content
                 elif (
                     reply.type == ReplyType.IMAGE_URL
                     or reply.type == ReplyType.VOICE

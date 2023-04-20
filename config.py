@@ -72,7 +72,7 @@ available_setting = {
     "wechaty_puppet_service_token": "",  # wechaty的token
     # wechatmp的配置
     "wechatmp_token": "",  # 微信公众平台的Token
-    "wechatmp_port": 8080,  # 微信公众平台的端口,需要端口转发到80或443
+    "wechatmp_port": 80,  # 微信公众平台的端口,需要端口转发到80或443
     "wechatmp_app_id": "",  # 微信公众平台的appID，仅服务号需要
     "wechatmp_app_secret": "",  # 微信公众平台的appsecret，仅服务号需要
     # chatgpt指令自定义触发词
