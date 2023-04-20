@@ -162,16 +162,16 @@ class Query:
                     while cache_key in channel.running and cnt < 40:
                         cnt = cnt + 1
                         time.sleep(0.1)
-                    if cnt == 40:
+                    if cnt == 45:
                         # Have waiting for 3x5 seconds
                         # return timeout message
                         reply_text = "【正在思考中，回复任意文字尝试获取回复】"
+                        replyPost = reply.TextMsg(from_user, to_user, reply_text).send()
                         logger.info(
                             "[wechatmp] Three queries has finished For {}: {}".format(
                                 from_user, message_id
                             )
                         )
-                        replyPost = reply.TextMsg(from_user, to_user, reply_text).send()
                         return replyPost
                     else:
                         pass
