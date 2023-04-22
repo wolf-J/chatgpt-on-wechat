@@ -41,6 +41,7 @@ available_setting = {
     "rate_limit_dalle": 50,  # openai dalle的调用频率限制
     # chatgpt api参数 参考https://platform.openai.com/docs/api-reference/chat/create
     "temperature": 0.9,
+    "max_tokens": 4096,  # 回复最大的字符数
     "top_p": 1,
     "frequency_penalty": 0,
     "presence_penalty": 0,
