@@ -1,1 +1,1 @@
-nohup python3 app.py>/dev/null 2>&1 &
+nohup python3 app.py>/dev/null 2>&1 & echo $! > pid
