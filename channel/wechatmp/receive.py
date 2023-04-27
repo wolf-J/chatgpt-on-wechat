@@ -4,6 +4,7 @@ import xml.etree.ElementTree as ET
 
 from bridge.context import ContextType
 from channel.chat_message import ChatMessage
+from channel.wechatmp.msg_type import MsgType
 from common.log import logger
 
 
@@ -30,13 +31,13 @@ class WeChatMPMessage(ChatMessage):
         # reply to other_user_id
         self.other_user_id = self.from_user_id
 
-        if self.msg_type == "text":
+        if self.msg_type == MsgType.TEXT:
             self.ctype = ContextType.TEXT
             self.content = xmlData.find("Content").text.encode("utf-8")
-        elif self.msg_type == "voice":
+        elif self.msg_type == MsgType.VOICE:
             self.ctype = ContextType.TEXT
             self.content = xmlData.find("Recognition").text.encode("utf-8")  # 接收语音识别结果
-        elif self.msg_type == "image":
+        elif self.msg_type == MsgType.IMAGE:
             # not implemented
             self.pic_url = xmlData.find("PicUrl").text
             self.media_id = xmlData.find("MediaId").text

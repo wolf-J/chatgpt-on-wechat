@@ -1,7 +1,6 @@
 import unittest
 
 from channel.wechatmp import receive
-from channel.wechatmp.ServiceAccount import Query
 from common.log import logger
 
 

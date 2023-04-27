@@ -10,6 +10,7 @@ from bridge.context import *
 from bridge.reply import *
 from channel.chat_channel import ChatChannel
 from channel.wechatmp.common import *
+from channel.wechatmp.msg_type import MsgType
 from common.expired_dict import ExpiredDict
 from common.log import logger
 from common.singleton import singleton
@@ -29,6 +30,7 @@ class WechatMPChannel(ChatChannel):
         super().__init__()
         self.passive_reply = passive_reply
         self.running = set()
+        # 缓存已经接收到的消息，避免重复处理，时间为1天
         self.received_msgs = ExpiredDict(60 * 60 * 24)
         if self.passive_reply:
             self.NOT_SUPPORT_REPLYTYPE = [ReplyType.IMAGE, ReplyType.VOICE]
@@ -106,7 +108,7 @@ class WechatMPChannel(ChatChannel):
             params = {"access_token": self.get_access_token()}
             json_data = {
                 "touser": receiver,
-                "msgtype": "text",
+                "msgtype": MsgType.TEXT,
                 "text": {"content": reply_text},
             }
             self.wechatmp_request(

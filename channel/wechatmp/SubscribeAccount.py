@@ -6,6 +6,7 @@ import channel.wechatmp.receive as receive
 import channel.wechatmp.reply as reply
 from bridge.context import *
 from channel.wechatmp.common import *
+from channel.wechatmp.msg_type import MsgType
 from channel.wechatmp.wechatmp_channel import WechatMPChannel
 from common.log import logger
 from config import conf
@@ -24,7 +25,7 @@ class Query:
             webData = web.data()
             logger.debug("[wechatmp] Receive request:\n" + webData.decode("utf-8"))
             wechatmp_msg = receive.parse_xml(webData)
-            if wechatmp_msg.msg_type == "text" or wechatmp_msg.msg_type == "voice":
+            if wechatmp_msg.msg_type == MsgType.TEXT or wechatmp_msg.msg_type == MsgType.VOICE:
                 from_user = wechatmp_msg.from_user_id
                 to_user = wechatmp_msg.to_user_id
                 message = wechatmp_msg.content.decode("utf-8")
@@ -106,12 +107,8 @@ class Query:
                     and channel.query2.get(cache_key) == True
                     and channel.query3.get(cache_key) == True
                 ):
-                    channel.query1[
-                        cache_key
-                    ] = False  # To improve waiting experience, this can be set to True.
-                    channel.query2[
-                        cache_key
-                    ] = False  # To improve waiting experience, this can be set to True.
+                    channel.query1[cache_key] = False  # To improve waiting experience, this can be set to True.
+                    channel.query2[cache_key] = False  # To improve waiting experience, this can be set to True.
                     channel.query3[cache_key] = False
                 # User request again, and the answer is ready
                 elif cache_key in channel.cache_dict:

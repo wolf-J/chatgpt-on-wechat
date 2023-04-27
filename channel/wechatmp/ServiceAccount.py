@@ -6,6 +6,7 @@ import channel.wechatmp.receive as receive
 import channel.wechatmp.reply as reply
 from bridge.context import *
 from channel.wechatmp.common import *
+from channel.wechatmp.msg_type import MsgType
 from channel.wechatmp.wechatmp_channel import WechatMPChannel
 from common.log import logger
 from config import conf
@@ -23,7 +24,7 @@ class Query:
             webData = web.data()
             # logger.debug("[wechatmp] Receive request:\n" + webData.decode("utf-8"))
             wechatmp_msg = receive.parse_xml(webData)
-            if wechatmp_msg.msg_type == "text" or wechatmp_msg.msg_type == "voice":
+            if wechatmp_msg.msg_type == MsgType.TEXT or wechatmp_msg.msg_type == MsgType.VOICE:
                 from_user = wechatmp_msg.from_user_id
                 message = wechatmp_msg.content.decode("utf-8")
                 message_id = wechatmp_msg.msg_id

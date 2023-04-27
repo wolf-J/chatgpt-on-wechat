@@ -84,6 +84,9 @@ available_setting = {
     "appdata_dir": "",  # 数据目录
     # 插件配置
     "plugin_trigger_prefix": "$",  # 规范插件提供聊天相关指令的前缀，建议不要和管理员指令前缀"#"冲突
+    "redis_host": "127.0.0.1",  # redis的host
+    "redis_port": 6379,  # redis的端口
+    "redis_password": "",  # redis的密码
 }
 
 
