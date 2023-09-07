@@ -22,7 +22,11 @@ plugins/**/
 !plugins/tool
 !plugins/banwords
 !plugins/banwords/**/
+plugins/banwords/__pycache__
+plugins/banwords/lib/__pycache__
 !plugins/hello
 !plugins/role
 !plugins/keyword
 pid
+
+!plugins/linkai

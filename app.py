@@ -46,7 +46,7 @@ def run():
 
         logger.info("Channel {} created.".format(channel_name))
 
-        if channel_name in ["wx", "wxy", "terminal", "wechatmp", "wechatmp_service"]:
+        if channel_name in ["wx", "wxy", "terminal", "wechatmp", "wechatmp_service", "wechatcom_app", "wework"]:
             PluginManager().load_plugins()
 
         # startup channel

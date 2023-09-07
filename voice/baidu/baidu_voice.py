@@ -43,9 +43,9 @@ class BaiduVoice(Voice):
                 with open(config_path, "r") as fr:
                     bconf = json.load(fr)
 
-            self.app_id = conf().get("baidu_app_id")
-            self.api_key = conf().get("baidu_api_key")
-            self.secret_key = conf().get("baidu_secret_key")
+            self.app_id = str(conf().get("baidu_app_id"))
+            self.api_key = str(conf().get("baidu_api_key"))
+            self.secret_key = str(conf().get("baidu_secret_key"))
             self.dev_id = conf().get("baidu_dev_pid")
             self.lang = bconf["lang"]
             self.ctp = bconf["ctp"]
@@ -82,12 +82,11 @@ class BaiduVoice(Voice):
             {"spd": self.spd, "pit": self.pit, "vol": self.vol, "per": self.per},
         )
         if not isinstance(result, dict):
-            fileName = TmpDir().path() + "reply-" + str(int(time.time())) + ".mp3"
+            # Avoid the same filename under multithreading
+            fileName = TmpDir().path() + "reply-" + str(int(time.time())) + "-" + str(hash(text) & 0x7FFFFFFF) + ".mp3"
             with open(fileName, "wb") as f:
                 f.write(result)
-            logger.info(
-                "[Baidu] textToVoice text={} voice file name={}".format(text, fileName)
-            )
+            logger.info("[Baidu] textToVoice text={} voice file name={}".format(text, fileName))
             reply = Reply(ReplyType.VOICE, fileName)
         else:
             logger.error("[Baidu] textToVoice error={}".format(result))
